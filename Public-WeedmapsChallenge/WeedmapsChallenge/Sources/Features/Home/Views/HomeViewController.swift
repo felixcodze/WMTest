@@ -44,6 +44,27 @@ class HomeViewController: UIViewController {
     navigationItem.searchController = search
   }
   
+  func showWebKit(_ business: Business) {
+    let storyBoard = UIStoryboard(name: "HomeDetail", bundle: .main)
+    guard
+      let webKitController = storyBoard.instantiateInitialViewController() as?
+      HomeDetailViewController,
+      let businessURLString = business.url
+    else { return }
+    webKitController.viewModel = HomeDetailViewModel(detailURLString: businessURLString)
+    navigationController?.pushViewController(webKitController, animated: true)
+  }
+  
+  func showSafari(_ business: Business) {
+    guard
+      let urlString = business.url,
+      let businessDetailURL = URL(string: urlString)
+    else { return }
+    if UIApplication.shared.canOpenURL(businessDetailURL) {
+      UIApplication.shared.open(businessDetailURL)
+    }
+  }
+  
 }
 
 // MARK: VIEW MODEL DELEGATE
@@ -75,6 +96,26 @@ extension HomeViewController: UISearchResultsUpdating {
 
 extension HomeViewController: UICollectionViewDelegateFlowLayout {
   func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+    
+    guard let business = viewModel?.businesses[indexPath.row] else {
+      return
+    }
+    
+    let alert = UIAlertController(title: K.businessDetailAlertTitle, message: K.businessDetailAlertDetail, preferredStyle: .actionSheet)
+    
+    alert.addAction(UIAlertAction(title: K.businessDetailsAlertWKActionTitle, style: .default, handler: { [weak self] (_) in
+      self?.showWebKit(business)
+    }))
+
+    alert.addAction(UIAlertAction(title: K.businessDetailsAlertSafariActionTitle, style: .default, handler: { [weak self] (_) in
+      self?.showSafari(business)
+    }))
+
+    alert.addAction(UIAlertAction(title: K.businessDetailsAlertCancelTitle, style: .cancel, handler: { (_) in
+        
+    }))
+    alert.modalPresentationStyle = .fullScreen
+    self.present(alert, animated: true, completion:nil)
     // IMPLEMENT:
     // 1a) Present the user with a UIAlertController (action sheet style) with options
     // to either display the Business's Yelp page in a WKWebView OR bump the user out to

@@ -34,15 +34,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Home" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AUb-cv-jeg">
-                                <rect key="frame" x="164.5" y="320.5" width="46" height="21"/>
-                                <accessibility key="accessibilityConfiguration" label="Home Title Label"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="uIA-R1-Xec">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <rect key="frame" x="0.0" y="44" width="375" height="574"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="zJD-J7-4Mm">
                                     <size key="itemSize" width="128" height="128"/>
@@ -59,12 +52,10 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="uIA-R1-Xec" firstAttribute="top" secondItem="tU4-XT-RHp" secondAttribute="top" id="4Dm-oS-bgJ"/>
-                            <constraint firstAttribute="bottom" secondItem="uIA-R1-Xec" secondAttribute="bottom" id="EgG-Gc-Xki"/>
-                            <constraint firstItem="AUb-cv-jeg" firstAttribute="centerX" secondItem="SsX-Ve-kCn" secondAttribute="centerX" id="GfJ-Cx-1i9"/>
-                            <constraint firstItem="AUb-cv-jeg" firstAttribute="centerY" secondItem="SsX-Ve-kCn" secondAttribute="centerY" id="Qsi-1N-t2h"/>
-                            <constraint firstAttribute="trailing" secondItem="uIA-R1-Xec" secondAttribute="trailing" id="nGH-0P-fF5"/>
-                            <constraint firstItem="uIA-R1-Xec" firstAttribute="leading" secondItem="tU4-XT-RHp" secondAttribute="leading" id="xef-Tg-0sp"/>
+                            <constraint firstItem="SsX-Ve-kCn" firstAttribute="leading" secondItem="uIA-R1-Xec" secondAttribute="leading" id="3BD-J5-DFy"/>
+                            <constraint firstItem="SsX-Ve-kCn" firstAttribute="trailing" secondItem="uIA-R1-Xec" secondAttribute="trailing" id="Fpw-ct-Dhy"/>
+                            <constraint firstItem="SsX-Ve-kCn" firstAttribute="bottom" secondItem="uIA-R1-Xec" secondAttribute="bottom" id="YmK-wG-Mh0"/>
+                            <constraint firstItem="SsX-Ve-kCn" firstAttribute="top" secondItem="uIA-R1-Xec" secondAttribute="top" id="f66-5I-GuB"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="SsX-Ve-kCn"/>
                     </view>
