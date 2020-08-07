@@ -18,13 +18,32 @@ class HomeViewController: UIViewController {
 
   override func viewDidLoad() {
     super.viewDidLoad()
+    setUpCollectionView()
+    setUpViewModel()
+    setUpSearchBar()
+  }
+  
+  func setUpCollectionView() {
     collectionView.register(UINib(nibName: "BusinessCell",
-                                  bundle: nil),
-                            forCellWithReuseIdentifier: "BusinessCell")
+          bundle: nil),
+    forCellWithReuseIdentifier: "BusinessCell")
+    collectionView.delegate = self
+  }
+  
+  func setUpViewModel() {
     viewModel = HomeViewModel(service: BusinessService())
     viewModel?.delegate = self
     viewModel?.searchForBusiness()
   }
+  
+  func setUpSearchBar() {
+    let search = UISearchController(searchResultsController: nil)
+    search.searchResultsUpdater = self
+    search.obscuresBackgroundDuringPresentation = false
+    search.searchBar.placeholder = "Type something here to search"
+    navigationItem.searchController = search
+  }
+  
 }
 
 // MARK: VIEW MODEL DELEGATE
@@ -46,10 +65,9 @@ extension HomeViewController: HomeViewModelDelegate {
 
 extension HomeViewController: UISearchResultsUpdating {
   func updateSearchResults(for searchController: UISearchController) {
-    // IMPLEMENT: Be sure to consider things like network errors
-    // and possible rate limiting from the Yelp API. If the user types
-    // very quickly, how will you prevent unnecessary requests from firing
-    // off? Be sure to leverage the searchDataTask and use it wisely!
+    viewModel?.resetSearch()
+    viewModel?.searchTerm = searchController.searchBar.text ?? ""
+    viewModel?.searchForBusiness()
   }
 }
 
@@ -88,4 +106,12 @@ extension HomeViewController: UICollectionViewDataSource {
   }
   
   
+}
+
+extension HomeViewController: UIScrollViewDelegate {
+  func scrollViewDidScroll(_ scrollView: UIScrollView) {
+    if abs(scrollView.contentOffset.y) >= scrollView.contentSize.height - scrollView.bounds.size.height {
+      viewModel?.loadNextPage()
+    }
+  }
 }

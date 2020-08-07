@@ -6,21 +6,43 @@
 //  Copyright © 2020 Weedmaps, LLC. All rights reserved.
 //
 
-import Alamofire
 import CoreLocation
 import Foundation
-
 import Alamofire
 
 class BusinessService: BaseBusinessService {
   let jsonDecoder = JSONDecoder()
+  private var searchDataTask: URLSessionDataTask?
   
-  func searchBusinesses(for searchString: String, userCoordinate: CLLocationCoordinate2D, page: Int, completion: @escaping (Swift.Result<BusinessData, AFError>) -> Void) {
-    AF.request(BusinessRouter.searchBusinesses(searchString: searchString,
-                                               coordinate: userCoordinate,
-                                               page: page))
-      .responseDecodable { (response: AFDataResponse<BusinessData>) in
-        completion(response.result)
+  func cancelSearch() {
+    searchDataTask?.cancel()
+  }
+  
+  func searchBusinesses(for searchString: String,
+                        userCoordinate: CLLocationCoordinate2D,
+                        offset: Int,
+                        completion: @escaping (Swift.Result<BusinessData, AFError>) -> Void) {
+      let searchRequest = BusinessRouter.searchBusinesses(searchString: searchString,
+                                                  coordinate: userCoordinate,
+                                                  offset: offset).urlRequest!
+    
+    searchDataTask = URLSession.shared.dataTask(with: searchRequest) { [weak self] data, response, error in
+      if let responseError = error?.asAFError {
+        completion(.failure(responseError))
+        return
       }
+      
+      if let data = data {
+        do {
+          if let businessData = try self?.jsonDecoder.decode(BusinessData.self, from: data){ 
+            completion(.success(businessData))
+          }
+        }catch {
+          
+        }
+      }
+      
+    }
+    searchDataTask?.resume()
   }
 }

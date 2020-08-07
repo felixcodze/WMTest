@@ -11,8 +11,10 @@ import Foundation
 import Alamofire
 
 protocol BaseBusinessService {
+  func cancelSearch()
   func searchBusinesses(for searchString: String,
                        userCoordinate: CLLocationCoordinate2D,
-                       page: Int,
+                       offset: Int,
                        completion: @escaping (Swift.Result<BusinessData, AFError>) -> Void)
+  
 }

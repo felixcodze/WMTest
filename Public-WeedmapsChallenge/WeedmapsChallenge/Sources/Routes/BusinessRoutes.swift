@@ -10,7 +10,7 @@ import Alamofire
 import CoreLocation
 
 enum BusinessRouter: URLRequestConvertible {
-  case searchBusinesses(searchString: String, coordinate: CLLocationCoordinate2D, page: Int)
+  case searchBusinesses(searchString: String, coordinate: CLLocationCoordinate2D, offset: Int)
 
   // MARK: - HTTPMethod
 
@@ -38,18 +38,18 @@ enum BusinessRouter: URLRequestConvertible {
 
   private var parameters: Parameters? {
     switch self {
-    case .searchBusinesses(let searchString, let coordinate, let page):
+    case .searchBusinesses(let searchString, let coordinate, let offset):
       return ["term": searchString,
               "latitude": coordinate.latitude,
               "longitude": coordinate.longitude,
-              "page": page,
-              "limit": 15]
+              "offset": offset,
+              "limit": K.businessPageLimit]
     }
   }
 
   func asURLRequest() throws -> URLRequest {
     guard
-      let url = URL(string: "https://api.yelp.com/v3/businesses/")
+      let url = URL(string: K.businessBaseURL)
     else {
       return URLRequest(url: URL(string: "")!)
     }
@@ -59,7 +59,7 @@ enum BusinessRouter: URLRequestConvertible {
     if let parameters = parameters {
         urlRequest = try URLEncoding.default.encode(urlRequest, with: parameters)
     }
-
+    urlRequest.cachePolicy = .returnCacheDataElseLoad
     return urlRequest
   }
 }

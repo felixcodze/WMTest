@@ -19,8 +19,9 @@ class HomeViewModel {
   var userLocation = CLLocationCoordinate2D(latitude: 34.323, longitude: -118.000)
   var totalResults: Int = 0
   var businesses: [Business] = []
-  var searchTerm: String = "pizza"
-  var currentPage: Int = 1
+  var searchTerm = "pizza"
+  var currentOffset: Int = 0
+  var isLoading = false
   weak var delegate: HomeViewModelDelegate?
   
   convenience init(service: BaseBusinessService) {
@@ -29,26 +30,40 @@ class HomeViewModel {
   }
   
   func resetSearch() {
-    currentPage = 1
+    businessService?.cancelSearch()
+    currentOffset = 0
     businesses = []
+  }
+  
+  func loadNextPage() {
+    if isLoading {
+      return
+    }
+    currentOffset += K.businessPageLimit
+    searchForBusiness()
   }
   
   func searchForBusiness() {
     guard !searchTerm.isEmpty else {
       resetSearch()
       delegate?.updateData()
+      isLoading = false
       return
     }
-    businessService?.searchBusinesses(for: searchTerm, userCoordinate: userLocation, page:currentPage, completion: { [weak self] result in
+    isLoading = true
+    businessService?.searchBusinesses(for: searchTerm, userCoordinate: userLocation, offset:currentOffset, completion: { [weak self] result in
       switch result {
       case .success(let businessData):
         self?.businesses += businessData.businesses ?? []
         self?.totalResults = businessData.total ?? businessData.businesses?.count ?? 0
         self?.delegate?.updateData()
+        self?.isLoading = false
       case .failure(let error): print("error \(error.localizedDescription)")
       }
       
     })
   }
+  
+  
   
 }
