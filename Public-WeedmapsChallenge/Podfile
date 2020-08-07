@@ -6,7 +6,7 @@ target 'WeedmapsChallenge' do
   use_frameworks!
 
   # Pods for WeedmapsChallenge
-  pod 'Alamofire', '4.7.3'
+  pod 'Alamofire'
 
   target 'WeedmapsChallengeTests' do
     inherit! :search_paths

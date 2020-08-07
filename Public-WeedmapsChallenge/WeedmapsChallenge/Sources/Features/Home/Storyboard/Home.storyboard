@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="v9M-4a-ST7">
-    <device id="retina4_7" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="v9M-4a-ST7">
+    <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -16,7 +15,7 @@
                     <tabBarItem key="tabBarItem" title="Home" image="first" id="Yc6-Om-qOz"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="wec-IV-yoN">
-                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
@@ -36,21 +35,43 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Home" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AUb-cv-jeg">
-                                <rect key="frame" x="164.5" y="330.5" width="46" height="21"/>
+                                <rect key="frame" x="164.5" y="320.5" width="46" height="21"/>
                                 <accessibility key="accessibilityConfiguration" label="Home Title Label"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="uIA-R1-Xec">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="zJD-J7-4Mm">
+                                    <size key="itemSize" width="128" height="128"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells/>
+                                <connections>
+                                    <outlet property="dataSource" destination="Y99-8g-iC3" id="5jc-rm-Z8A"/>
+                                    <outlet property="delegate" destination="Y99-8g-iC3" id="uRn-ah-DmY"/>
+                                </connections>
+                            </collectionView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstItem="uIA-R1-Xec" firstAttribute="top" secondItem="tU4-XT-RHp" secondAttribute="top" id="4Dm-oS-bgJ"/>
+                            <constraint firstAttribute="bottom" secondItem="uIA-R1-Xec" secondAttribute="bottom" id="EgG-Gc-Xki"/>
                             <constraint firstItem="AUb-cv-jeg" firstAttribute="centerX" secondItem="SsX-Ve-kCn" secondAttribute="centerX" id="GfJ-Cx-1i9"/>
                             <constraint firstItem="AUb-cv-jeg" firstAttribute="centerY" secondItem="SsX-Ve-kCn" secondAttribute="centerY" id="Qsi-1N-t2h"/>
+                            <constraint firstAttribute="trailing" secondItem="uIA-R1-Xec" secondAttribute="trailing" id="nGH-0P-fF5"/>
+                            <constraint firstItem="uIA-R1-Xec" firstAttribute="leading" secondItem="tU4-XT-RHp" secondAttribute="leading" id="xef-Tg-0sp"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="SsX-Ve-kCn"/>
                     </view>
                     <navigationItem key="navigationItem" id="TnG-pJ-5IY"/>
+                    <connections>
+                        <outlet property="collectionView" destination="uIA-R1-Xec" id="qrn-Ss-sgR"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XIJ-E0-LPc" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

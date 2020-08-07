@@ -7,4 +7,13 @@ import UIKit
 
 class BusinessCell: UICollectionViewCell {
     // IMPLEMENT
+  
+  @IBOutlet var nameLabel: UILabel!
+  
+  var name: String = "NONE"
+  
+  func updateCell() {
+    nameLabel.text = name
+  }
+  
 }
