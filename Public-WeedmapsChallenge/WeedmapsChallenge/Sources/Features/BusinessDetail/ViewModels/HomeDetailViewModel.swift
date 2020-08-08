@@ -13,7 +13,7 @@ protocol HomeDetailViewModelDelegate: class {
 }
 
 class HomeDetailViewModel {
-  weak var delegate: HomeViewModelDelegate?
+  weak var delegate: HomeDetailViewModelDelegate?
   var currentURLString: String?
   
   convenience init(detailURLString: String) {

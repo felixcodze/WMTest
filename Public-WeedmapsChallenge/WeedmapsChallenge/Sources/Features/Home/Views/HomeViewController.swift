@@ -44,20 +44,24 @@ class HomeViewController: UIViewController {
     navigationItem.searchController = search
   }
   
-  func showWebKit(_ business: Business) {
+}
+
+// MARK: VIEW MODEL DELEGATE
+
+extension HomeViewController: WebNavigationDelegate {
+  
+  func navigateToWebKit(_ urlString: String) {
     let storyBoard = UIStoryboard(name: "HomeDetail", bundle: .main)
     guard
       let webKitController = storyBoard.instantiateInitialViewController() as?
-      HomeDetailViewController,
-      let businessURLString = business.url
+      HomeDetailViewController
     else { return }
-    webKitController.viewModel = HomeDetailViewModel(detailURLString: businessURLString)
+    webKitController.viewModel = HomeDetailViewModel(detailURLString: urlString)
     navigationController?.pushViewController(webKitController, animated: true)
   }
   
-  func showSafari(_ business: Business) {
+  func navigateToSafari(_ urlString: String) {
     guard
-      let urlString = business.url,
       let businessDetailURL = URL(string: urlString)
     else { return }
     if UIApplication.shared.canOpenURL(businessDetailURL) {
@@ -65,12 +69,7 @@ class HomeViewController: UIViewController {
     }
   }
   
-}
-
-// MARK: VIEW MODEL DELEGATE
-
-extension HomeViewController: HomeViewModelDelegate {
-  func updateData() {
+  func updateView() {
     DispatchQueue.main.async { [weak self] in
       self?.collectionView.reloadData()
     }
@@ -97,18 +96,14 @@ extension HomeViewController: UISearchResultsUpdating {
 extension HomeViewController: UICollectionViewDelegateFlowLayout {
   func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
     
-    guard let business = viewModel?.businesses[indexPath.row] else {
-      return
-    }
-    
     let alert = UIAlertController(title: K.businessDetailAlertTitle, message: K.businessDetailAlertDetail, preferredStyle: .actionSheet)
     
     alert.addAction(UIAlertAction(title: K.businessDetailsAlertWKActionTitle, style: .default, handler: { [weak self] (_) in
-      self?.showWebKit(business)
+      self?.viewModel?.businessIndexPathSelected(for: indexPath, navigationType: .webkit)
     }))
 
     alert.addAction(UIAlertAction(title: K.businessDetailsAlertSafariActionTitle, style: .default, handler: { [weak self] (_) in
-      self?.showSafari(business)
+      self?.viewModel?.businessIndexPathSelected(for: indexPath, navigationType: .safari)
     }))
 
     alert.addAction(UIAlertAction(title: K.businessDetailsAlertCancelTitle, style: .cancel, handler: { (_) in
@@ -116,10 +111,6 @@ extension HomeViewController: UICollectionViewDelegateFlowLayout {
     }))
     alert.modalPresentationStyle = .fullScreen
     self.present(alert, animated: true, completion:nil)
-    // IMPLEMENT:
-    // 1a) Present the user with a UIAlertController (action sheet style) with options
-    // to either display the Business's Yelp page in a WKWebView OR bump the user out to
-    // Safari. Both options should display the Business's Yelp page details
   }
   
   func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
@@ -132,12 +123,11 @@ extension HomeViewController: UICollectionViewDelegateFlowLayout {
 
 extension HomeViewController: UICollectionViewDataSource {
   func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-    // IMPLEMENT:
     return viewModel?.businesses.count ?? 0
   }
 
   func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-    // IMPLEMENT:
+
     guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "BusinessCell", for: indexPath) as? BusinessCell else {
       return UICollectionViewCell()
     }

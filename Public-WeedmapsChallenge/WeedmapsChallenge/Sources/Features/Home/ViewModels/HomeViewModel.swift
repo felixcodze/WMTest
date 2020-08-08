@@ -8,9 +8,11 @@
 
 import Foundation
 import CoreLocation
+import CoreData
 
-protocol HomeViewModelDelegate: class {
-  func updateData()
+enum BusinessDetailNavigationType {
+  case safari
+  case webkit
 }
 
 class HomeViewModel {
@@ -22,11 +24,13 @@ class HomeViewModel {
   var searchTerm = "pizza"
   var currentOffset: Int = 0
   var isLoading = false
-  weak var delegate: HomeViewModelDelegate?
+  var managedContext: NSManagedObjectContext!
+  var delegate: WebNavigationDelegate?
   
   convenience init(service: BaseBusinessService) {
     self.init()
     businessService = service as? BusinessService
+    managedContext = CoreDataManager.shared.persistentContainer.viewContext
   }
   
   func resetSearch() {
@@ -46,7 +50,7 @@ class HomeViewModel {
   func searchForBusiness() {
     guard !searchTerm.isEmpty else {
       resetSearch()
-      delegate?.updateData()
+      delegate?.updateView()
       isLoading = false
       return
     }
@@ -56,7 +60,7 @@ class HomeViewModel {
       case .success(let businessData):
         self?.businesses += businessData.businesses ?? []
         self?.totalResults = businessData.total ?? businessData.businesses?.count ?? 0
-        self?.delegate?.updateData()
+        self?.delegate?.updateView()
         self?.isLoading = false
       case .failure(let error): print("error \(error.localizedDescription)")
       }
@@ -64,6 +68,16 @@ class HomeViewModel {
     })
   }
   
-  
+  func businessIndexPathSelected(for businessIndexPath: IndexPath, navigationType: BusinessDetailNavigationType) {
+    
+    let business = businesses[businessIndexPath.row]
+    
+    CoreDataManager.shared.creatOrUpdateFavorite(business, context: managedContext)
+    guard let businessURL = business.url else { return }
+    switch navigationType {
+    case .safari : delegate?.navigateToSafari(businessURL)
+    case .webkit : delegate?.navigateToWebKit(businessURL)
+    }
+  }
   
 }
