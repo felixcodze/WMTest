@@ -27,7 +27,6 @@ class FavoritesViewController: UIViewController {
   
   func setUpTableView() {
     favoritesTable.register(UINib(nibName: "FavoriteCell", bundle: nil), forCellReuseIdentifier: "FavoriteCell")
-
   }
   
 }
@@ -56,8 +55,6 @@ extension FavoritesViewController: WebNavigationDelegate {
   func updateView() {
     favoritesTable.reloadData()
   }
-  
-  
 }
 
 extension FavoritesViewController: UITableViewDataSource {
@@ -96,6 +93,8 @@ extension FavoritesViewController: UITableViewDelegate {
         
     }))
     alert.modalPresentationStyle = .fullScreen
-    self.present(alert, animated: true, completion:nil)
+    DispatchQueue.main.async {
+      self.present(alert, animated: true, completion:nil)
+    }
   }
 }

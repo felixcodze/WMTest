@@ -57,15 +57,20 @@ extension HomeViewController: WebNavigationDelegate {
       HomeDetailViewController
     else { return }
     webKitController.viewModel = HomeDetailViewModel(detailURLString: urlString)
-    navigationController?.pushViewController(webKitController, animated: true)
+    DispatchQueue.main.async { [weak self] in
+      self?.navigationController?.pushViewController(webKitController, animated: true)
+    }
+    
   }
   
   func navigateToSafari(_ urlString: String) {
     guard
       let businessDetailURL = URL(string: urlString)
     else { return }
-    if UIApplication.shared.canOpenURL(businessDetailURL) {
-      UIApplication.shared.open(businessDetailURL)
+    DispatchQueue.main.async {
+      if UIApplication.shared.canOpenURL(businessDetailURL) {
+        UIApplication.shared.open(businessDetailURL)
+      }
     }
   }
   
@@ -110,7 +115,10 @@ extension HomeViewController: UICollectionViewDelegateFlowLayout {
         
     }))
     alert.modalPresentationStyle = .fullScreen
-    self.present(alert, animated: true, completion:nil)
+    
+    DispatchQueue.main.async { [weak self] in
+      self?.present(alert, animated: true, completion:nil)
+    }
   }
   
   func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
