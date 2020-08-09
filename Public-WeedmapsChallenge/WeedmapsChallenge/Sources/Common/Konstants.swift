@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import CoreGraphics
 
 struct K {
   static let businessPageLimit: Int = 15
@@ -16,4 +17,9 @@ struct K {
   static let businessDetailsAlertWKActionTitle = "Within the app"
   static let businessDetailsAlertSafariActionTitle = "With Safari"
   static let businessDetailsAlertCancelTitle = "Cancel"
+  static let searchHistoryMaxTableHeight: CGFloat = 160
+  static let businessCellWidthDivider: CGFloat = 2
+  static let businessCellHeight: CGFloat = 180
+  static let businessCellBorderSpacing: CGFloat = 20
+  static let businessCellSpacing: CGFloat = 20
 }

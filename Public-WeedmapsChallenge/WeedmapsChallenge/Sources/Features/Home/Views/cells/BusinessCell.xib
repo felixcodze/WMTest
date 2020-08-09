@@ -17,20 +17,35 @@
                 <rect key="frame" x="0.0" y="0.0" width="140" height="180"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="QWg-NT-WQo">
-                        <rect key="frame" x="0.0" y="0.0" width="140" height="110"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="250" insetsLayoutMarginsFromSafeArea="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QWg-NT-WQo">
+                        <rect key="frame" x="0.0" y="0.0" width="140" height="120"/>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="120" id="5AG-wg-46P"/>
+                        </constraints>
                     </imageView>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="This label should dynamically size the cell height to be able to fit up to 3 lines of text!!!" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jX6-EP-bNL">
-                        <rect key="frame" x="0.0" y="118" width="140" height="53"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <color key="backgroundColor" red="0.47843137250000001" green="0.64313725489999995" blue="0.47843137250000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                        <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <nil key="highlightedColor"/>
-                    </label>
+                    <stackView opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="250" axis="vertical" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="sRw-nC-Vvk">
+                        <rect key="frame" x="5" y="120" width="130" height="41"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="250" text="This label should dynamical" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jX6-EP-bNL">
+                                <rect key="frame" x="0.0" y="0.0" width="130" height="41"/>
+                                <color key="backgroundColor" red="0.47843137250000001" green="0.64313725489999995" blue="0.47843137250000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                    </stackView>
                 </subviews>
             </view>
+            <constraints>
+                <constraint firstItem="QWg-NT-WQo" firstAttribute="leading" secondItem="Dza-KO-lnQ" secondAttribute="leading" id="OHQ-WV-8Z5"/>
+                <constraint firstItem="sRw-nC-Vvk" firstAttribute="leading" secondItem="Dza-KO-lnQ" secondAttribute="leading" constant="5" id="TRo-VU-b6A"/>
+                <constraint firstItem="sRw-nC-Vvk" firstAttribute="top" secondItem="QWg-NT-WQo" secondAttribute="bottom" id="f8w-9u-qVK"/>
+                <constraint firstItem="QWg-NT-WQo" firstAttribute="top" secondItem="Dza-KO-lnQ" secondAttribute="top" id="i2C-xS-Sx7"/>
+                <constraint firstAttribute="trailing" secondItem="QWg-NT-WQo" secondAttribute="trailing" id="lNG-VR-HOA"/>
+                <constraint firstAttribute="trailing" secondItem="sRw-nC-Vvk" secondAttribute="trailing" constant="5" id="oDM-ur-gUH"/>
+            </constraints>
             <viewLayoutGuide key="safeArea" id="2TO-Pi-HIN"/>
             <size key="customSize" width="184" height="209"/>
             <connections>

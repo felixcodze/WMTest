@@ -8,11 +8,11 @@
 
 import Foundation
 
-protocol BaseViewModelDelegatge: class {
+protocol BaseViewModelDelegate: class {
   func updateView()
 }
 
-protocol WebNavigationDelegate: BaseViewModelDelegatge {
+protocol WebNavigationDelegate: BaseViewModelDelegate {
   func navigateToWebKit(_ urlString: String)
   func navigateToSafari(_ urlString: String)
 }

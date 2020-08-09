@@ -7,10 +7,12 @@
         <attribute name="visits" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
     </entity>
     <entity name="SearchTerm" representedClassName="SearchTerm" syncable="YES" codeGenerationType="class">
+        <attribute name="resultCount" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="searchDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="searchString" optional="YES" attributeType="String"/>
     </entity>
     <elements>
-        <element name="SearchTerm" positionX="-63" positionY="-18" width="128" height="58"/>
+        <element name="SearchTerm" positionX="-63" positionY="-18" width="128" height="88"/>
         <element name="Favorite" positionX="-54" positionY="0" width="128" height="103"/>
     </elements>
 </model>

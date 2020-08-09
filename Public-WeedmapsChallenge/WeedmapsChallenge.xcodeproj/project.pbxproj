@@ -17,6 +17,9 @@
 		3722428C24DE867700442704 /* FavoriteCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3722428A24DE867700442704 /* FavoriteCell.swift */; };
 		3722428D24DE867700442704 /* FavoriteCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3722428B24DE867700442704 /* FavoriteCell.xib */; };
 		3722428F24DE89C300442704 /* BaseViewModelDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3722428E24DE89C300442704 /* BaseViewModelDelegate.swift */; };
+		3722429224DF7AFE00442704 /* SearchHistoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3722429024DF7AFE00442704 /* SearchHistoryCell.swift */; };
+		3722429324DF7AFE00442704 /* SearchHistoryCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3722429124DF7AFE00442704 /* SearchHistoryCell.xib */; };
+		3722429524DF7E8000442704 /* ClassExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3722429424DF7E8000442704 /* ClassExtensions.swift */; };
 		3748E85324DBDD220028C075 /* BaseBusinessService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3748E85224DBDD220028C075 /* BaseBusinessService.swift */; };
 		3748E85524DBDD3A0028C075 /* BusinessService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3748E85424DBDD3A0028C075 /* BusinessService.swift */; };
 		3748E85724DBDD4B0028C075 /* MockBusinessService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3748E85624DBDD4B0028C075 /* MockBusinessService.swift */; };
@@ -72,6 +75,9 @@
 		3722428A24DE867700442704 /* FavoriteCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteCell.swift; sourceTree = "<group>"; };
 		3722428B24DE867700442704 /* FavoriteCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FavoriteCell.xib; sourceTree = "<group>"; };
 		3722428E24DE89C300442704 /* BaseViewModelDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewModelDelegate.swift; sourceTree = "<group>"; };
+		3722429024DF7AFE00442704 /* SearchHistoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchHistoryCell.swift; sourceTree = "<group>"; };
+		3722429124DF7AFE00442704 /* SearchHistoryCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SearchHistoryCell.xib; sourceTree = "<group>"; };
+		3722429424DF7E8000442704 /* ClassExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClassExtensions.swift; sourceTree = "<group>"; };
 		3748E85224DBDD220028C075 /* BaseBusinessService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseBusinessService.swift; sourceTree = "<group>"; };
 		3748E85424DBDD3A0028C075 /* BusinessService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusinessService.swift; sourceTree = "<group>"; };
 		3748E85624DBDD4B0028C075 /* MockBusinessService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockBusinessService.swift; sourceTree = "<group>"; };
@@ -153,6 +159,7 @@
 			children = (
 				3722427424DD435D00442704 /* Konstants.swift */,
 				3722428E24DE89C300442704 /* BaseViewModelDelegate.swift */,
+				3722429424DF7E8000442704 /* ClassExtensions.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -265,6 +272,8 @@
 			children = (
 				5ABB14BD2167D2D900A2CB2C /* BusinessCell.swift */,
 				5ABB14BF2167D31100A2CB2C /* BusinessCell.xib */,
+				3722429024DF7AFE00442704 /* SearchHistoryCell.swift */,
+				3722429124DF7AFE00442704 /* SearchHistoryCell.xib */,
 			);
 			path = cells;
 			sourceTree = "<group>";
@@ -557,6 +566,7 @@
 				5ABB14C02167D31100A2CB2C /* BusinessCell.xib in Resources */,
 				5ABB14862167C42600A2CB2C /* Assets.xcassets in Resources */,
 				5ABB14C42167D51000A2CB2C /* Home.storyboard in Resources */,
+				3722429324DF7AFE00442704 /* SearchHistoryCell.xib in Resources */,
 				5ABB14842167C42400A2CB2C /* Main.storyboard in Resources */,
 				3722427D24DD474700442704 /* HomeDetail.storyboard in Resources */,
 				5ABB14C22167D50300A2CB2C /* Favorites.storyboard in Resources */,
@@ -675,10 +685,12 @@
 				5ABB14812167C42300A2CB2C /* FavoritesViewController.swift in Sources */,
 				3722427224DD3DDE00442704 /* BusinessAFService.swift in Sources */,
 				3748E86224DBE1CB0028C075 /* HomeViewModel.swift in Sources */,
+				3722429224DF7AFE00442704 /* SearchHistoryCell.swift in Sources */,
 				3748E86D24DBE8420028C075 /* BusinessRoutes.swift in Sources */,
 				3748E85924DBDE750028C075 /* Business.swift in Sources */,
 				3722427B24DD461300442704 /* HomeDetailViewModel.swift in Sources */,
 				5ABB14BE2167D2D900A2CB2C /* BusinessCell.swift in Sources */,
+				3722429524DF7E8000442704 /* ClassExtensions.swift in Sources */,
 				3748E85524DBDD3A0028C075 /* BusinessService.swift in Sources */,
 				3722428824DE75CD00442704 /* CoreDataManager.swift in Sources */,
 				3722428624DE732D00442704 /* CoreModel.xcdatamodeld in Sources */,

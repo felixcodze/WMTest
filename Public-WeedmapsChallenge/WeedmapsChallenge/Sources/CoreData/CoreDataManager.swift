@@ -62,21 +62,25 @@ class CoreDataManager: NSObject {
   }
   
   func creatOrUpdateSearchTerm(_ searchTermString: String,
-                             context: NSManagedObjectContext) {
+                               resultCount: Int,
+                               context: NSManagedObjectContext) {
     var searchTerm: SearchTerm!
 
     let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "SearchTerm")
-    let predicateID = NSPredicate(format: "searchString == %@", searchTerm)
+    let predicateID = NSPredicate(format: "searchString == %@", searchTermString)
     fetchRequest.predicate = predicateID
 
     do {
       let results = try context.fetch(fetchRequest)
       if results.count > 0 {
         searchTerm = results.first as? SearchTerm
+        
       } else {
         searchTerm = SearchTerm(context: context)
         searchTerm.searchString = searchTermString
       }
+      searchTerm.searchDate = Date()
+      searchTerm.resultCount = Int32(resultCount)
     } catch {
       print(error.localizedDescription)
     }

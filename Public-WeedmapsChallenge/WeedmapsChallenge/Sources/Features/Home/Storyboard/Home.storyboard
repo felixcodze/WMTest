@@ -37,7 +37,7 @@
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="uIA-R1-Xec">
                                 <rect key="frame" x="0.0" y="44" width="375" height="574"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                                <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="zJD-J7-4Mm">
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="zJD-J7-4Mm">
                                     <size key="itemSize" width="128" height="128"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
@@ -49,19 +49,35 @@
                                     <outlet property="delegate" destination="Y99-8g-iC3" id="uRn-ah-DmY"/>
                                 </connections>
                             </collectionView>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Vc0-AD-Al1">
+                                <rect key="frame" x="0.0" y="44" width="375" height="160"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="160" id="EZD-9h-eaX"/>
+                                </constraints>
+                                <connections>
+                                    <outlet property="dataSource" destination="Y99-8g-iC3" id="l3g-wt-5mt"/>
+                                    <outlet property="delegate" destination="Y99-8g-iC3" id="BwN-7g-8Ig"/>
+                                </connections>
+                            </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="SsX-Ve-kCn" firstAttribute="leading" secondItem="uIA-R1-Xec" secondAttribute="leading" id="3BD-J5-DFy"/>
+                            <constraint firstItem="Vc0-AD-Al1" firstAttribute="trailing" secondItem="SsX-Ve-kCn" secondAttribute="trailing" id="6Cc-N5-5S4"/>
                             <constraint firstItem="SsX-Ve-kCn" firstAttribute="trailing" secondItem="uIA-R1-Xec" secondAttribute="trailing" id="Fpw-ct-Dhy"/>
+                            <constraint firstItem="Vc0-AD-Al1" firstAttribute="top" secondItem="SsX-Ve-kCn" secondAttribute="top" id="R1k-SK-Qvo"/>
                             <constraint firstItem="SsX-Ve-kCn" firstAttribute="bottom" secondItem="uIA-R1-Xec" secondAttribute="bottom" id="YmK-wG-Mh0"/>
                             <constraint firstItem="SsX-Ve-kCn" firstAttribute="top" secondItem="uIA-R1-Xec" secondAttribute="top" id="f66-5I-GuB"/>
+                            <constraint firstItem="Vc0-AD-Al1" firstAttribute="leading" secondItem="SsX-Ve-kCn" secondAttribute="leading" id="vp0-8k-Iiy"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="SsX-Ve-kCn"/>
                     </view>
                     <navigationItem key="navigationItem" id="TnG-pJ-5IY"/>
                     <connections>
                         <outlet property="collectionView" destination="uIA-R1-Xec" id="qrn-Ss-sgR"/>
+                        <outlet property="searchHistoryHeightConstraint" destination="EZD-9h-eaX" id="hcT-f1-EKN"/>
+                        <outlet property="searchHistoryTable" destination="Vc0-AD-Al1" id="tQt-nR-6i2"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XIJ-E0-LPc" userLabel="First Responder" sceneMemberID="firstResponder"/>
