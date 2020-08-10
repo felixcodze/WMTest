@@ -8,8 +8,8 @@
 
 import Foundation
 
-protocol HomeDetailViewModelDelegate: class {
-  func updateWebView(url: String)
+protocol HomeDetailViewModelDelegate: BaseViewModelDelegate {
+  func updateWebView(urlRequest: URLRequest)
 }
 
 class HomeDetailViewModel {
@@ -21,6 +21,20 @@ class HomeDetailViewModel {
     currentURLString = detailURLString
   }
   
+  func buildURLRequest(){
+    guard
+      let businessURLString = currentURLString,
+      let businessURL = URL(string: businessURLString)
+    else {
+      let err = NSError(domain: "wmcc",
+                        code: 999,
+                        userInfo: ["description":"There was a problem with your web link"])
+      delegate?.showError(error: err)
+      return
+    }
+    let businessRequest = URLRequest(url: businessURL)
+    delegate?.updateWebView(urlRequest: businessRequest)
+  }
   
   
 }

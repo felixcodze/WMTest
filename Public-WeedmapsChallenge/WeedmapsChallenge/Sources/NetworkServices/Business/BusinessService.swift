@@ -21,13 +21,13 @@ class BusinessService: BaseBusinessService {
   func searchBusinesses(for searchString: String,
                         userCoordinate: CLLocationCoordinate2D,
                         offset: Int,
-                        completion: @escaping (Swift.Result<BusinessData, AFError>) -> Void) {
+                        completion: @escaping (Swift.Result<BusinessData, Error>) -> Void) {
       let searchRequest = BusinessRouter.searchBusinesses(searchString: searchString,
                                                   coordinate: userCoordinate,
                                                   offset: offset).urlRequest!
     
     searchDataTask = URLSession.shared.dataTask(with: searchRequest) { [weak self] data, response, error in
-      if let responseError = error?.asAFError {
+      if let responseError = error {
         completion(.failure(responseError))
         return
       }

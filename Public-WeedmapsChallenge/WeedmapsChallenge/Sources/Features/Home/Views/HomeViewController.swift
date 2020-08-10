@@ -4,7 +4,7 @@
 
 import UIKit
 
-class HomeViewController: UIViewController {
+class HomeViewController: BaseViewController {
   // MARK: Properties
 
   @IBOutlet private var collectionView: UICollectionView!
@@ -55,12 +55,14 @@ class HomeViewController: UIViewController {
   }
 
   func setUpSearchBar() {
-    let search = UISearchController(searchResultsController: nil)
-    search.searchResultsUpdater = self
-    search.obscuresBackgroundDuringPresentation = false
-    search.searchBar.placeholder = "Search your location"
-    navigationItem.searchController = search
-    search.searchBar.delegate = self
+    navigationController?.navigationBar.topItem?.title = "SEARCH AND ENJOY"
+    navigationItem.backBarButtonItem = UIBarButtonItem(title:"", style:.plain, target:nil, action:nil)
+    searchController = UISearchController(searchResultsController: nil)
+    searchController.searchResultsUpdater = self
+    searchController.obscuresBackgroundDuringPresentation = false
+    searchController.searchBar.placeholder = K.searchPlaceholder
+    navigationItem.searchController = searchController
+    searchController.searchBar.delegate = self
   }
 
   @objc func keyboardWillShow(_ notification: Notification) {
@@ -86,6 +88,14 @@ class HomeViewController: UIViewController {
 // MARK: VIEW MODEL DELEGATE
 
 extension HomeViewController: HomeViewModelDelegate {
+  func showError(error: NSError) {
+    if let otherError = error.userInfo["description"] as? String {
+      showError(title: "Oh No!", message: otherError)
+    } else {
+      showError(title: "Oh No!", message: error.localizedDescription)
+    }
+  }
+  
   func navigateToWebKit(_ urlString: String) {
     let storyBoard = UIStoryboard(name: "HomeDetail", bundle: .main)
     guard
@@ -187,6 +197,7 @@ extension HomeViewController: UISearchBarDelegate {
 
 extension HomeViewController: UICollectionViewDelegateFlowLayout {
   func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+    searchController.dismiss(animated: true, completion: nil)
     showSelectionAlert(indexPath: indexPath)
   }
 
@@ -203,6 +214,14 @@ extension HomeViewController: UICollectionViewDelegateFlowLayout {
                         bottom: 10,
                         right: K.businessCellBorderSpacing)
   }
+  
+  func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+    return 20
+  }
+  
+  func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+    return 20
+  }
 }
 
 // MARK: UICollectionViewDataSource
@@ -216,7 +235,7 @@ extension HomeViewController: UICollectionViewDataSource {
     guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "BusinessCell", for: indexPath) as? BusinessCell else {
       return UICollectionViewCell()
     }
-    cell.name = viewModel?.businesses[indexPath.row].name ?? "NO NAME"
+    cell.business = viewModel?.businesses[indexPath.row]
     cell.updateCell()
     return cell
   }
@@ -255,11 +274,10 @@ extension HomeViewController: UITableViewDelegate {
     DispatchQueue.main.async { [weak self] in
       self?.viewModel?.searchFromHistoryIndex(indexPath)
       self?.searchController.isActive = true
-      
       self?.searchController.searchBar.text = self?.viewModel?.searchTerms[indexPath.row].searchString ?? ""
+      self?.searchController.dismiss(animated: true, completion: nil)
       self?.searchHistoryTable.isHidden = true
       
-      UIApplication.shared.sendAction(#selector(self?.resignFirstResponder), to:nil, from:nil, for:nil)
     }
   }
 }

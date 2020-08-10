@@ -20,6 +20,8 @@
 		3722429224DF7AFE00442704 /* SearchHistoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3722429024DF7AFE00442704 /* SearchHistoryCell.swift */; };
 		3722429324DF7AFE00442704 /* SearchHistoryCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3722429124DF7AFE00442704 /* SearchHistoryCell.xib */; };
 		3722429524DF7E8000442704 /* ClassExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3722429424DF7E8000442704 /* ClassExtensions.swift */; };
+		3722429724E0A91700442704 /* CacheManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3722429624E0A91600442704 /* CacheManager.swift */; };
+		3722429924E0B03E00442704 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3722429824E0B03E00442704 /* BaseViewController.swift */; };
 		3748E85324DBDD220028C075 /* BaseBusinessService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3748E85224DBDD220028C075 /* BaseBusinessService.swift */; };
 		3748E85524DBDD3A0028C075 /* BusinessService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3748E85424DBDD3A0028C075 /* BusinessService.swift */; };
 		3748E85724DBDD4B0028C075 /* MockBusinessService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3748E85624DBDD4B0028C075 /* MockBusinessService.swift */; };
@@ -78,6 +80,8 @@
 		3722429024DF7AFE00442704 /* SearchHistoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchHistoryCell.swift; sourceTree = "<group>"; };
 		3722429124DF7AFE00442704 /* SearchHistoryCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SearchHistoryCell.xib; sourceTree = "<group>"; };
 		3722429424DF7E8000442704 /* ClassExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClassExtensions.swift; sourceTree = "<group>"; };
+		3722429624E0A91600442704 /* CacheManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CacheManager.swift; sourceTree = "<group>"; };
+		3722429824E0B03E00442704 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		3748E85224DBDD220028C075 /* BaseBusinessService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseBusinessService.swift; sourceTree = "<group>"; };
 		3748E85424DBDD3A0028C075 /* BusinessService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusinessService.swift; sourceTree = "<group>"; };
 		3748E85624DBDD4B0028C075 /* MockBusinessService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockBusinessService.swift; sourceTree = "<group>"; };
@@ -160,6 +164,7 @@
 				3722427424DD435D00442704 /* Konstants.swift */,
 				3722428E24DE89C300442704 /* BaseViewModelDelegate.swift */,
 				3722429424DF7E8000442704 /* ClassExtensions.swift */,
+				3722429824E0B03E00442704 /* BaseViewController.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -198,13 +203,14 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
-		3722428024DE726400442704 /* CoreData */ = {
+		3722428024DE726400442704 /* LocalData */ = {
 			isa = PBXGroup;
 			children = (
 				3722428424DE732D00442704 /* CoreModel.xcdatamodeld */,
 				3722428724DE75CD00442704 /* CoreDataManager.swift */,
+				3722429624E0A91600442704 /* CacheManager.swift */,
 			);
-			path = CoreData;
+			path = LocalData;
 			sourceTree = "<group>";
 		};
 		3722428924DE866100442704 /* cells */ = {
@@ -396,7 +402,7 @@
 			children = (
 				5ABB14AF2167C63000A2CB2C /* Bootstrap */,
 				3722427324DD434700442704 /* Common */,
-				3722428024DE726400442704 /* CoreData */,
+				3722428024DE726400442704 /* LocalData */,
 				3748E84F24DBDC800028C075 /* Features */,
 				3748E85024DBDCAC0028C075 /* Models */,
 				3748E85124DBDCD70028C075 /* NetworkServices */,
@@ -693,6 +699,8 @@
 				3722429524DF7E8000442704 /* ClassExtensions.swift in Sources */,
 				3748E85524DBDD3A0028C075 /* BusinessService.swift in Sources */,
 				3722428824DE75CD00442704 /* CoreDataManager.swift in Sources */,
+				3722429924E0B03E00442704 /* BaseViewController.swift in Sources */,
+				3722429724E0A91700442704 /* CacheManager.swift in Sources */,
 				3722428624DE732D00442704 /* CoreModel.xcdatamodeld in Sources */,
 				3722428F24DE89C300442704 /* BaseViewModelDelegate.swift in Sources */,
 				5ABB147D2167C42300A2CB2C /* AppDelegate.swift in Sources */,

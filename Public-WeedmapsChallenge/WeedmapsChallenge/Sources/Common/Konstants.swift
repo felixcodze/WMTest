@@ -19,7 +19,8 @@ struct K {
   static let businessDetailsAlertCancelTitle = "Cancel"
   static let searchHistoryMaxTableHeight: CGFloat = 160
   static let businessCellWidthDivider: CGFloat = 2
-  static let businessCellHeight: CGFloat = 180
+  static let businessCellHeight: CGFloat = 200
   static let businessCellBorderSpacing: CGFloat = 20
   static let businessCellSpacing: CGFloat = 20
+  static let searchPlaceholder = "Search for a business!"
 }

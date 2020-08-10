@@ -8,11 +8,11 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Home-->
+        <!--Search-->
         <scene sceneID="jJP-1j-kg8">
             <objects>
                 <navigationController id="v9M-4a-ST7" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Home" image="first" id="Yc6-Om-qOz"/>
+                    <tabBarItem key="tabBarItem" title="Search" image="search-glass" id="Yc6-Om-qOz"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="wec-IV-yoN">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
@@ -34,9 +34,12 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="homebg" translatesAutoresizingMaskIntoConstraints="NO" id="qef-nL-BHQ">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                            </imageView>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="uIA-R1-Xec">
                                 <rect key="frame" x="0.0" y="44" width="375" height="574"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="zJD-J7-4Mm">
                                     <size key="itemSize" width="128" height="128"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
@@ -64,11 +67,15 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="SsX-Ve-kCn" firstAttribute="leading" secondItem="uIA-R1-Xec" secondAttribute="leading" id="3BD-J5-DFy"/>
+                            <constraint firstAttribute="bottom" secondItem="qef-nL-BHQ" secondAttribute="bottom" id="40C-yz-InU"/>
                             <constraint firstItem="Vc0-AD-Al1" firstAttribute="trailing" secondItem="SsX-Ve-kCn" secondAttribute="trailing" id="6Cc-N5-5S4"/>
                             <constraint firstItem="SsX-Ve-kCn" firstAttribute="trailing" secondItem="uIA-R1-Xec" secondAttribute="trailing" id="Fpw-ct-Dhy"/>
+                            <constraint firstAttribute="trailing" secondItem="qef-nL-BHQ" secondAttribute="trailing" id="OnQ-v2-Gfn"/>
                             <constraint firstItem="Vc0-AD-Al1" firstAttribute="top" secondItem="SsX-Ve-kCn" secondAttribute="top" id="R1k-SK-Qvo"/>
                             <constraint firstItem="SsX-Ve-kCn" firstAttribute="bottom" secondItem="uIA-R1-Xec" secondAttribute="bottom" id="YmK-wG-Mh0"/>
                             <constraint firstItem="SsX-Ve-kCn" firstAttribute="top" secondItem="uIA-R1-Xec" secondAttribute="top" id="f66-5I-GuB"/>
+                            <constraint firstItem="qef-nL-BHQ" firstAttribute="top" secondItem="tU4-XT-RHp" secondAttribute="top" id="hBK-r6-GYb"/>
+                            <constraint firstItem="qef-nL-BHQ" firstAttribute="leading" secondItem="tU4-XT-RHp" secondAttribute="leading" id="sTy-VX-bZm"/>
                             <constraint firstItem="Vc0-AD-Al1" firstAttribute="leading" secondItem="SsX-Ve-kCn" secondAttribute="leading" id="vp0-8k-Iiy"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="SsX-Ve-kCn"/>
@@ -86,6 +93,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="first" width="30" height="30"/>
+        <image name="homebg" width="1080" height="1920"/>
+        <image name="search-glass" width="128" height="128"/>
     </resources>
 </document>

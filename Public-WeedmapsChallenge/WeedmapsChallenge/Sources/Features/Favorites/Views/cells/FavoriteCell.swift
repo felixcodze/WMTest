@@ -15,14 +15,20 @@ class FavoriteCell: UITableViewCell {
   @IBOutlet private var visitsLabel: UILabel!
   
   var favorite: Favorite!
+  var imageLoadTask: URLSessionDownloadTask?
   
-  override func awakeFromNib() {
-    super.awakeFromNib()
-    // Initialization code
+  override func prepareForReuse() {
+    super.prepareForReuse()
+    businessImageView.image = nil
+    imageLoadTask?.cancel()
   }
-
+  
   func updateCell() {
     nameLabel.text = favorite.name
     visitsLabel.text = "Visits: \(favorite.visits)"
+    guard let urlString = favorite.imageURL,
+      let imageURL = URL(string: urlString)
+      else { return }
+    imageLoadTask = businessImageView.loadImageWithURL(imageURL)
   }
 }

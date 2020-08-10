@@ -78,7 +78,8 @@ class HomeViewModel {
                                           if self.currentOffset == 0 {
                                             self.saveSearchTerm(term, resultCount: self.totalResults)
                                           }
-                                        case .failure(let error): print("error \(error.localizedDescription)")
+                                        case .failure(let error):
+                                          self.delegate?.showError(error: error as NSError)
                                         }
                                         
     })
@@ -102,6 +103,7 @@ class HomeViewModel {
     guard let searchString = searchTerm.searchString else {
       return
     }
+    resetSearch()
     searchForTerm(searchString)
   }
   

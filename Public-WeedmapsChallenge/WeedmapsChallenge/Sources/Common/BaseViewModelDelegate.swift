@@ -10,6 +10,7 @@ import Foundation
 
 protocol BaseViewModelDelegate: class {
   func updateView()
+  func showError(error: NSError)
 }
 
 protocol WebNavigationDelegate: BaseViewModelDelegate {

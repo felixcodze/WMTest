@@ -21,12 +21,13 @@ class BusinessAFService: BaseBusinessService {
   func searchBusinesses(for searchString: String,
                           userCoordinate: CLLocationCoordinate2D,
                           offset: Int,
-                          completion: @escaping (Swift.Result<BusinessData, AFError>) -> Void) {
+                          completion: @escaping (Swift.Result<BusinessData, Error>) -> Void) {
     AF.request(BusinessRouter.searchBusinesses(searchString: searchString,
                                                coordinate: userCoordinate,
                                                offset: offset))
       .responseDecodable { (response: AFDataResponse<BusinessData>) in
-        completion(response.result)
+        let error = NSError(domain: "", code: 999, userInfo: ["description": response.error?.localizedDescription ?? ""])
+        completion(.failure(error))
       }
   }
   

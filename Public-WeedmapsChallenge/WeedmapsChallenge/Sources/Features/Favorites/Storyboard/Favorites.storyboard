@@ -8,11 +8,11 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Navigation Controller-->
+        <!--My Favorites-->
         <scene sceneID="nf1-6Y-2Ip">
             <objects>
                 <navigationController id="m7V-bW-YWA" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" systemItem="favorites" id="KzR-zg-bS8"/>
+                    <tabBarItem key="tabBarItem" title="My Favorites" image="starSmall" id="KzR-zg-bS8"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="4jX-Ad-uKg">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
@@ -62,4 +62,7 @@
             <point key="canvasLocation" x="63" y="220"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="starSmall" width="14" height="14"/>
+    </resources>
 </document>

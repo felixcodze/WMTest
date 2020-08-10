@@ -4,7 +4,7 @@
 
 import UIKit
 
-class FavoritesViewController: UIViewController {
+class FavoritesViewController: BaseViewController {
   
   @IBOutlet private var favoritesTable: UITableView!
   var viewModel: FavoritesViewModel?
@@ -13,6 +13,7 @@ class FavoritesViewController: UIViewController {
     super.viewDidLoad()
     setUpTableView()
     setUpViewModel()
+    setUpNavigationBar()
   }
   
   override func viewWillAppear(_ animated: Bool) {
@@ -29,9 +30,21 @@ class FavoritesViewController: UIViewController {
     favoritesTable.register(UINib(nibName: "FavoriteCell", bundle: nil), forCellReuseIdentifier: "FavoriteCell")
   }
   
+  func setUpNavigationBar() {
+    navigationController?.navigationBar.topItem?.title = "MY FAVORITES"
+  }
+  
 }
 
 extension FavoritesViewController: WebNavigationDelegate {
+  func showError(error: NSError) {
+    if let otherError = error.userInfo["description"] as? String {
+      showError(title: "Oh No!", message: otherError)
+    } else {
+      showError(title: "Oh No!", message: error.localizedDescription)
+    }
+  }
+  
   
   func navigateToWebKit(_ urlString: String) {
     let storyBoard = UIStoryboard(name: "HomeDetail", bundle: .main)

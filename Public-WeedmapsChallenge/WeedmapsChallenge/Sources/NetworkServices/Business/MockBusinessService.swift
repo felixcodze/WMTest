@@ -28,7 +28,7 @@ class MockBusinessService: BaseBusinessService {
   func searchBusinesses(for searchString: String,
                         userCoordinate: CLLocationCoordinate2D,
                         offset: Int,
-                        completion: @escaping (Swift.Result<BusinessData, AFError>) -> Void) {
+                        completion: @escaping (Swift.Result<BusinessData, Error>) -> Void) {
     completion(.success(MockBusinessService.stubData))
   }
 }

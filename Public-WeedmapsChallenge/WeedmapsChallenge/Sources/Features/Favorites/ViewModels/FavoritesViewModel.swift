@@ -27,7 +27,7 @@ class FavoritesViewModel {
       favorites = try managedContext.fetch(fetchRequest)
       delegate?.updateView()
     } catch let error as NSError {
-      print("Could not fetch. \(error), \(error.userInfo)")
+      delegate?.showError(error: error)
     }
   }
   

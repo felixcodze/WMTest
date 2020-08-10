@@ -24,17 +24,24 @@
                                     <wkPreferences key="preferences"/>
                                 </wkWebViewConfiguration>
                             </wkWebView>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="53f-ey-JTe">
+                                <rect key="frame" x="188.5" y="429.5" width="37" height="37"/>
+                                <color key="color" red="0.99215686270000003" green="0.1960784314" blue="0.38823529410000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
                             <constraint firstItem="2Pr-im-v0e" firstAttribute="top" secondItem="QMP-5U-JSf" secondAttribute="top" id="2Sn-2T-iv1"/>
                             <constraint firstItem="2Pr-im-v0e" firstAttribute="leading" secondItem="QMP-5U-JSf" secondAttribute="leading" id="Mqd-y3-sOb"/>
                             <constraint firstItem="2Pr-im-v0e" firstAttribute="bottom" secondItem="QMP-5U-JSf" secondAttribute="bottom" id="NPz-fC-UeT"/>
+                            <constraint firstItem="53f-ey-JTe" firstAttribute="centerY" secondItem="7dW-kh-iyJ" secondAttribute="centerY" id="iyf-e8-aaW"/>
                             <constraint firstItem="2Pr-im-v0e" firstAttribute="trailing" secondItem="QMP-5U-JSf" secondAttribute="trailing" id="mjL-MT-VYT"/>
+                            <constraint firstItem="53f-ey-JTe" firstAttribute="centerX" secondItem="7dW-kh-iyJ" secondAttribute="centerX" id="vqO-Ov-Od0"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="QMP-5U-JSf"/>
                     </view>
                     <connections>
+                        <outlet property="loadingView" destination="53f-ey-JTe" id="P8Z-SH-6tM"/>
                         <outlet property="webView" destination="2Pr-im-v0e" id="SHk-Cv-IzG"/>
                     </connections>
                 </viewController>
