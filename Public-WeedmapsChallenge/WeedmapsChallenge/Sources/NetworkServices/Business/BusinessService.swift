@@ -8,11 +8,15 @@
 
 import CoreLocation
 import Foundation
-import Alamofire
 
 class BusinessService: BaseBusinessService {
-  let jsonDecoder = JSONDecoder()
   private var searchDataTask: URLSessionDataTask?
+  
+  private var jsonDecoder: JSONDecoder {
+    let decoder = JSONDecoder()
+    decoder.keyDecodingStrategy = .convertFromSnakeCase
+    return decoder
+  }
   
   func cancelSearch() {
     searchDataTask?.cancel()

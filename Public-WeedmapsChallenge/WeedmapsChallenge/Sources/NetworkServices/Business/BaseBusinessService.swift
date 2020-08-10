@@ -8,7 +8,6 @@
 
 import CoreLocation
 import Foundation
-import Alamofire
 
 protocol BaseBusinessService {
   func cancelSearch()

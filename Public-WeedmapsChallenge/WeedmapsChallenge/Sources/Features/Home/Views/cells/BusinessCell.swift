@@ -38,7 +38,7 @@ class BusinessCell: UICollectionViewCell {
   }
   func updateCell() {
     guard
-      let imageURLString = business?.image_url,
+      let imageURLString = business?.imageUrl,
       let imageURL = URL(string: imageURLString),
       let name = business?.name,
       let rating = business?.rating

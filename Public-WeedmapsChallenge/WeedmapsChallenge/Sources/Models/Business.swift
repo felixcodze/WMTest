@@ -21,12 +21,12 @@ struct Business: Decodable {
   let phone: String?
   let id: String?
   let alias: String?
-  let is_closed: Bool?
+  let isClosed: Bool?
   let categories: [Category]?
   let reviewCount: Int?
   let url: String?
   let coordinates: Coordinate?
-  let image_url: String?
+  let imageUrl: String?
   let location: Location?
   let distance: Float?
   let transactions: [String]?
@@ -52,6 +52,6 @@ struct Location: Decodable {
   let address3: String?
   let city: String?
   let state: String?
-  let zip_code: String?
+  let zipCode: String?
   let country: String?
 }

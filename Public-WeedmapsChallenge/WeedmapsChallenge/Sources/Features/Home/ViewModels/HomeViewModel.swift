@@ -20,8 +20,8 @@ protocol HomeViewModelDelegate: WebNavigationDelegate {
 }
 
 class HomeViewModel {
-  var businessService: BusinessService?
-  var userLocation = CLLocationCoordinate2D(latitude: 34.323, longitude: -118.000)
+  var businessService: BaseBusinessService?
+  var userLocation: CLLocationCoordinate2D?
   var totalResults: Int = 0
   var businesses: [Business] = []
   var currentSearchString = ""
@@ -34,7 +34,7 @@ class HomeViewModel {
   
   convenience init(service: BaseBusinessService) {
     self.init()
-    businessService = service as? BusinessService
+    businessService = service
     managedContext = CoreDataManager.shared.persistentContainer.viewContext
   }
   
@@ -56,17 +56,21 @@ class HomeViewModel {
   }
   
   func searchForTerm(_ term: String) {
-    guard !term.isEmpty else {
+    guard
+      !term.isEmpty,
+      let coordinate = userLocation
+    else {
       resetSearch()
       delegate?.updateView()
       isLoading = false
       return
     }
     
+    
     currentSearchString = term
     isLoading = true
     businessService?.searchBusinesses(for: term,
-                                      userCoordinate: userLocation,
+                                      userCoordinate: coordinate,
                                       offset: currentOffset,
                                       completion: { [weak self] result in
                                         guard let self = self else { return }

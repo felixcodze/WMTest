@@ -11,7 +11,11 @@ import Foundation
 import Alamofire
 
 class BusinessAFService: BaseBusinessService {
-  let jsonDecoder = JSONDecoder()
+  private var jsonDecoder: JSONDecoder {
+    let decoder = JSONDecoder()
+    decoder.keyDecodingStrategy = .convertFromSnakeCase
+    return decoder
+  }
   private var searchDataTask: URLSessionDataTask?
   
   func cancelSearch() {

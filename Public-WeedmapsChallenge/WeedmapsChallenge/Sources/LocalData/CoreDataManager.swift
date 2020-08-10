@@ -51,7 +51,7 @@ class CoreDataManager: NSObject {
       } else {
         favorite = Favorite(context: context)
         favorite.name = business.name
-        favorite.imageURL = business.image_url
+        favorite.imageURL = business.imageUrl
         favorite.detailsURL = business.url
         favorite.visits = 1
       }

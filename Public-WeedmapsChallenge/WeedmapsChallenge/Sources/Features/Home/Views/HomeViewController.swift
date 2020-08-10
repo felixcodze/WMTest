@@ -2,6 +2,7 @@
 //  Copyright © 2018 Weedmaps, LLC. All rights reserved.
 //
 
+import CoreLocation
 import UIKit
 
 class HomeViewController: BaseViewController {
@@ -27,6 +28,12 @@ class HomeViewController: BaseViewController {
     setUpSearchBar()
   }
 
+  override func viewDidAppear(_ animated: Bool) {
+    super.viewDidAppear(animated)
+    LocationManager.shared.delegate = self
+    LocationManager.shared.startService()
+  }
+
   func setUpCollectionView() {
     collectionView.register(UINib(nibName: "BusinessCell",
                                   bundle: nil),
@@ -37,9 +44,9 @@ class HomeViewController: BaseViewController {
                                            name: UIResponder.keyboardWillShowNotification,
                                            object: nil)
     NotificationCenter.default.addObserver(self,
-                                          selector: #selector(keyboardDidHide),
-                                          name: UIResponder.keyboardDidHideNotification,
-                                          object: nil)
+                                           selector: #selector(keyboardDidHide),
+                                           name: UIResponder.keyboardDidHideNotification,
+                                           object: nil)
   }
 
   func setUpHistoryTableView() {
@@ -56,7 +63,7 @@ class HomeViewController: BaseViewController {
 
   func setUpSearchBar() {
     navigationController?.navigationBar.topItem?.title = "SEARCH AND ENJOY"
-    navigationItem.backBarButtonItem = UIBarButtonItem(title:"", style:.plain, target:nil, action:nil)
+    navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
     searchController = UISearchController(searchResultsController: nil)
     searchController.searchResultsUpdater = self
     searchController.obscuresBackgroundDuringPresentation = false
@@ -72,10 +79,9 @@ class HomeViewController: BaseViewController {
       DispatchQueue.main.async { [weak self] in
         self?.collectionView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: keyboardHeight, right: 0)
       }
-      
     }
   }
-  
+
   @objc func keyboardDidHide(_ notification: Notification) {
     DispatchQueue.main.async { [weak self] in
       self?.collectionView.contentInset = .zero
@@ -95,7 +101,7 @@ extension HomeViewController: HomeViewModelDelegate {
       showError(title: "Oh No!", message: error.localizedDescription)
     }
   }
-  
+
   func navigateToWebKit(_ urlString: String) {
     let storyBoard = UIStoryboard(name: "HomeDetail", bundle: .main)
     guard
@@ -166,6 +172,14 @@ extension HomeViewController: HomeViewModelDelegate {
 
 extension HomeViewController: UISearchResultsUpdating {
   func updateSearchResults(for searchController: UISearchController) {
+    
+    guard
+      viewModel?.userLocation != nil
+    else {
+      LocationManager.shared.startService()
+      return
+    }
+    
     guard let searchText = searchController.searchBar.text,
       searchText.isEmpty == false
     else {
@@ -173,23 +187,20 @@ extension HomeViewController: UISearchResultsUpdating {
       viewModel?.searchForTerm("")
       return
     }
-      
+
     viewModel?.loadAndDisplaySearchHistory(searchText)
 
     searchWorkItem?.cancel()
 
-        // Wrap our request in a work item
+    // Wrap our request in a work item
     let requestWorkItem = DispatchWorkItem { [weak self] in
       self?.viewModel?.searchForTerm(searchText)
     }
-        // Save the new work item and execute it after 250 ms
+    // Save the new work item and execute it after 250 ms
     searchWorkItem = requestWorkItem
     DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(500),
                                   execute: requestWorkItem)
-    
   }
-  
-  
 }
 
 extension HomeViewController: UISearchBarDelegate {
@@ -228,11 +239,11 @@ extension HomeViewController: UICollectionViewDelegateFlowLayout {
                         bottom: 10,
                         right: K.businessCellBorderSpacing)
   }
-  
+
   func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
     return 20
   }
-  
+
   func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
     return 20
   }
@@ -291,7 +302,38 @@ extension HomeViewController: UITableViewDelegate {
       self?.searchController.searchBar.text = self?.viewModel?.searchTerms[indexPath.row].searchString ?? ""
       self?.searchController.dismiss(animated: true, completion: nil)
       self?.searchHistoryTable.isHidden = true
-      
+    }
+  }
+}
+
+extension HomeViewController: LocationManagerDelegate {
+  func updateLocation(with location: CLLocation) {
+    guard let term = viewModel?.currentSearchString else {
+      return
+    }
+    viewModel?.userLocation = location.coordinate
+    viewModel?.searchForTerm(term)
+  }
+
+  func locationDidFailWithError(_ error: NSError) {
+    showError(error: error)
+  }
+
+  func locationSettingsRequested() {
+    let alertController = UIAlertController(title: "Oh No!", message: "You need to turn on location settings", preferredStyle: .alert)
+
+    let settingsAction = UIAlertAction(title: "Settings", style: .default) { (_: UIAlertAction!) in
+      UIApplication.shared.open(URL(string: UIApplication.openSettingsURLString)!, options: [:], completionHandler: nil)
+    }
+
+    let OKAction = UIAlertAction(title: "OK", style: .default) { (_: UIAlertAction!) in
+    }
+
+    alertController.addAction(OKAction)
+    alertController.addAction(settingsAction)
+    
+    DispatchQueue.main.async { [weak self] in
+      self?.present(alertController, animated: true, completion: nil)
     }
   }
 }

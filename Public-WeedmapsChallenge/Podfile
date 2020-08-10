@@ -14,7 +14,7 @@ target 'WeedmapsChallenge' do
   end
 
   target 'WeedmapsChallengeUITests' do
-    inherit! :search_paths
+    inherit! :complete
     # Pods for testing
   end
   

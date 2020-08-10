@@ -26,10 +26,10 @@
             </objects>
             <point key="canvasLocation" x="-658" y="220"/>
         </scene>
-        <!--Favorites View Controller-->
+        <!--MY FAVORITES-->
         <scene sceneID="SG0-Lg-gUD">
             <objects>
-                <viewController id="xwX-iP-dns" customClass="FavoritesViewController" customModule="WeedmapsChallenge" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="MY FAVORITES" id="xwX-iP-dns" customClass="FavoritesViewController" customModule="WeedmapsChallenge" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="QQt-Ws-tkN">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -63,6 +63,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="starSmall" width="14" height="14"/>
+        <image name="starSmall" width="30" height="30"/>
     </resources>
 </document>
