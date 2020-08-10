@@ -402,12 +402,12 @@
 			children = (
 				5ABB14AF2167C63000A2CB2C /* Bootstrap */,
 				3722427324DD434700442704 /* Common */,
-				3722428024DE726400442704 /* LocalData */,
 				3748E84F24DBDC800028C075 /* Features */,
+				3722428024DE726400442704 /* LocalData */,
 				3748E85024DBDCAC0028C075 /* Models */,
+				5ABB14B02167C64100A2CB2C /* Navigation */,
 				3748E85124DBDCD70028C075 /* NetworkServices */,
 				3748E86A24DBE8290028C075 /* Routes */,
-				5ABB14B02167C64100A2CB2C /* Navigation */,
 			);
 			path = Sources;
 			sourceTree = "<group>";

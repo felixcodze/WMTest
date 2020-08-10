@@ -15,7 +15,7 @@ class HomeViewController: BaseViewController {
   private var searchResults = [Business]()
   private var searchDataTask: URLSessionDataTask?
   private var viewModel: HomeViewModel?
-  var searchTask: DispatchWorkItem?
+  var searchWorkItem: DispatchWorkItem?
 
   // MARK: Lifecycle
 
@@ -133,7 +133,7 @@ extension HomeViewController: HomeViewModelDelegate {
     DispatchQueue.main.async { [weak self] in
       self?.searchHistoryTable.reloadData()
       let termCount = self?.viewModel?.searchTerms.count ?? 0
-      let currentSearch = self?.viewModel?.currentSearchString ?? ""
+      let currentSearch = self?.viewModel?.historySearchString ?? ""
       self?.searchHistoryTable.isHidden = termCount == 0 || currentSearch.isEmpty
       self?.searchHistoryHeightConstraint.constant = min(K.searchHistoryMaxTableHeight,
                                                          CGFloat(termCount * 40))
@@ -166,13 +166,27 @@ extension HomeViewController: HomeViewModelDelegate {
 
 extension HomeViewController: UISearchResultsUpdating {
   func updateSearchResults(for searchController: UISearchController) {
-    guard !(searchController.searchBar.text?.isEmpty ?? false) else {
+    guard let searchText = searchController.searchBar.text,
+      searchText.isEmpty == false
+    else {
       viewModel?.resetSearch()
       viewModel?.searchForTerm("")
       return
     }
-    viewModel?.searchForTerm(searchController.searchBar.text ?? "")
-    viewModel?.loadAndDisplaySearchHistory(searchController.searchBar.text ?? "")
+      
+    viewModel?.loadAndDisplaySearchHistory(searchText)
+
+    searchWorkItem?.cancel()
+
+        // Wrap our request in a work item
+    let requestWorkItem = DispatchWorkItem { [weak self] in
+      self?.viewModel?.searchForTerm(searchText)
+    }
+        // Save the new work item and execute it after 250 ms
+    searchWorkItem = requestWorkItem
+    DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(500),
+                                  execute: requestWorkItem)
+    
   }
   
   

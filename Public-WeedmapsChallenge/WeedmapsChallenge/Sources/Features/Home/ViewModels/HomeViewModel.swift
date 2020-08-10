@@ -25,6 +25,7 @@ class HomeViewModel {
   var totalResults: Int = 0
   var businesses: [Business] = []
   var currentSearchString = ""
+  var historySearchString = ""
   var currentOffset: Int = 0
   var isLoading = false
   var managedContext: NSManagedObjectContext!
@@ -112,6 +113,7 @@ class HomeViewModel {
   }
   
   func loadAndDisplaySearchHistory(_ term: String) {
+    historySearchString = term
     let fetchRequest = NSFetchRequest<SearchTerm>(entityName: "SearchTerm")
     let sort = NSSortDescriptor(key: "searchString", ascending: true)
     let predicate = NSPredicate(format:"SELF.searchString CONTAINS %@", term)
